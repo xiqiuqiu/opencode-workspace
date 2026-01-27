@@ -1,7 +1,7 @@
 > **AI 提示：最方便的配置是让 AI 帮你读完代码仓的 README 和 CLAUDE.md，引导用户一步步开始。**
 
 <div align="center">
-<img src="https://raw.githubusercontent.com/Aster110/mycc/main/assets/logo-bear.png" alt="MyCC Logo" width="200">
+<img src="https://raw.githubusercontent.com/Aster110/mycc/main/img/logo-bear.png" alt="MyCC Logo" width="200">
 
 [![License](https://img.shields.io/badge/License-MIT-green)](LICENSE)
 ![Status](https://img.shields.io/badge/状态-可用-brightgreen)
@@ -123,7 +123,7 @@ mycc/
 访问 [mycc.dev](https://mycc.dev)，输入连接码和配对码即可。
 
 <div align="center">
-<img src="https://raw.githubusercontent.com/Aster110/mycc/main/assets/screenshot-pair.png" alt="配对页面" width="300">
+<img src="https://raw.githubusercontent.com/Aster110/mycc/main/img/screenshot-pair.png" alt="配对页面" width="300">
 </div>
 
 ### 微信小程序（即将上线）
