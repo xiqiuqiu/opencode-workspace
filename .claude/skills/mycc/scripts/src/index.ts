@@ -19,7 +19,7 @@ const generateCode = customAlphabet("ABCDEFGHJKLMNPQRSTUVWXYZ23456789", 6);
 import qrcode from "qrcode-terminal";
 import chalk from "chalk";
 import { HttpServer } from "./http-server.js";
-import { checkCCAvailable } from "./cc-bridge.js";
+import { initBridge } from "./bridge-manager.js";
 
 const PORT = process.env.PORT || 8080;
 
@@ -122,15 +122,29 @@ async function startServer(args: string[]) {
   // 杀掉旧进程，确保端口可用
   killExistingProcess(Number(PORT));
 
-  // 检查 CC 是否可用
-  console.log("检查 Claude Code CLI...");
-  const ccAvailable = await checkCCAvailable();
-  if (!ccAvailable) {
-    console.error(chalk.red("错误: Claude Code CLI 未安装或不可用"));
-    console.error("请先安装: npm install -g @anthropic-ai/claude-code");
+  // 检查 OpenCode/Claude Code 可用性
+  console.log("检查 OpenCode/Claude Code...");
+  try {
+    const info = await initBridge(process.cwd());
+    if (info.opencodeAvailable) {
+      console.log(chalk.green("✓ OpenCode 可用"));
+    } else if (info.claudeAvailable) {
+      console.log(chalk.green("✓ Claude Code CLI 可用"));
+    } else {
+      console.error(chalk.red("错误: OpenCode 和 Claude Code 均不可用"));
+      console.error("请先启动: opencode serve 或安装: npm install -g @anthropic-ai/claude-code");
+      process.exit(1);
+    }
+    if (!info.opencodeAvailable) {
+      console.log(chalk.yellow("⚠️  OpenCode 未启动，将使用 Claude Code"));
+    }
+    console.log("");
+  } catch (error) {
+    console.error(chalk.red("错误: OpenCode 和 Claude Code 均不可用"));
+    console.error("请先启动: opencode serve 或安装: npm install -g @anthropic-ai/claude-code");
+    console.error(error instanceof Error ? error.message : String(error));
     process.exit(1);
   }
-  console.log(chalk.green("✓ Claude Code CLI 可用\n"));
 
   // 检查 cloudflared 是否可用
   console.log("检查 cloudflared...");

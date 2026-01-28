@@ -4,8 +4,7 @@
  */
 
 import http from "http";
-import { executeChat } from "./cc-bridge.js";
-import { getConversationList, getConversation } from "./history.js";
+import { executeChat, getConversation, getConversationList } from "./bridge-manager.js";
 
 const PORT = process.env.PORT || 8080;
 

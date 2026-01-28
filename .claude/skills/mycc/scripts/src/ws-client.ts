@@ -4,7 +4,7 @@
  */
 
 import WebSocket from "ws";
-import { executeChat } from "./cc-bridge.js";
+import { executeChat } from "./bridge-manager.js";
 import type {
   ClientMessage,
   ChatMessage,
